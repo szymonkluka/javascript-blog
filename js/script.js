@@ -17,7 +17,7 @@ const titleClickHandler = function(event){
   /* [DONE] remove class 'active' from all article links  */
   const activeLinks = document.querySelectorAll('.titles a.active');
   for(let activeLink of activeLinks){
-    
+
     activeLink.classList.remove('active');
   }
   /* [DONE] add class 'active' to the clicked link */
@@ -153,11 +153,12 @@ const generateTags = function(){
       /* [NEW] END LOOP: for each tag in allTags: */
       /* [NEW] add html from allTagsHTML to tagList */
       tagList.innerHTML = templates.tagCloudLink(allTagsData);
-      console.log(allTagsData);
+      //console.log(allTagsData);
     }
   }
 };
 generateTags();
+
 const tagClickHandler = function(event){
   /* prevent default action for this event */
   event.preventDefault();
@@ -186,6 +187,8 @@ const tagClickHandler = function(event){
   /* execute function "generateTitleLinks" with article selector as argument */
   generateTitleLinks('[data-tags~="' + tag + '"]');
 };
+
+
 const addClickListenersToTags = function(){
   /* find all links to tags */
   const links = document.querySelectorAll('a[href^="#tag-"]');
@@ -197,6 +200,9 @@ const addClickListenersToTags = function(){
   }
 };
 addClickListenersToTags();
+
+
+
 const generateAuthors = function () {
   /* [NEW] create a new variable allAuthors with an empty object */
   let allAuthors = {};
@@ -229,7 +235,7 @@ const generateAuthors = function () {
   /* [NEW] START LOOP: for each author in allAuthor: */
   for(let author in allAuthors){
   /* [NEW] generate code of a link and add it to allAuthorsHTML */
-  
+
     //allAuthorsHTML += '<li><a href="#author-' + author + '" >' + author + ' (' + allAuthors[author] + ') </a></li> ';
     allAuthorsData.authors.push({
       author: author,
@@ -241,7 +247,9 @@ const generateAuthors = function () {
   }
 };
 generateAuthors();
+
 const authorClickHandler = function(event){
+  console.log('wszedłem tutaj');
   /* prevent default action for this event */
   event.preventDefault();
   /* make new constant named "clickedElement" and give it the value of "this" */
@@ -272,13 +280,18 @@ const authorClickHandler = function(event){
   /* execute function "generateTitleLinks" with article selector as argument */
   generateTitleLinks('[data-author="' + author + '"]');
 };
+
+
+
+
 const addClickListenersToAuthors = function(){
   /* find all links to authors */
-  const allAuthorsLinks = document.querySelectorAll('a[href^="author-"]');
+  const AuthorLinks = document.querySelectorAll('a[href^="#author-"]');
   /* START LOOP: for each link */
-  for (let link of allAuthorsLinks){
+  console.log(AuthorLinks);
+  for (let AuthorLink of AuthorLinks){
   /* add authorClickHandler as event listener for that link */
-    link.addEventListener('click', authorClickHandler);
+    AuthorLink.addEventListener('click', authorClickHandler);
   }
 };
 addClickListenersToAuthors();
